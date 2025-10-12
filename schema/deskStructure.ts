@@ -1,7 +1,7 @@
 // deskStructure.ts
-import type { StructureResolver } from 'sanity/structure'
+import type { StructureResolver, StructureBuilder } from 'sanity/structure'
 // import { S } from 'sanity/structure'
-import type { StructureBuilder } from 'sanity/structure'
+
 export const customStructure: StructureResolver = (S) =>
   S.list()
     .title('Content')
@@ -13,7 +13,7 @@ export const customStructure: StructureResolver = (S) =>
         ),
     ])
 
-const getPageTree = (S: any, parentId: string | null = null) => {
+const getPageTree = (S: StructureBuilder, parentId: string | null = null): ReturnType<StructureBuilder['documentTypeList']> => {
   const filterQuery = parentId 
     ? `_type == "page" && parent._ref == "${parentId}"`
     : `_type == "page" && !defined(parent)`
