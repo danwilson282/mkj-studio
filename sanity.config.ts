@@ -3,6 +3,7 @@ import { presentationTool } from 'sanity/presentation'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {customStructure} from "./schema/deskStructure"
+import { colorInput } from '@sanity/color-input'
 import {schema} from './schema'
 import { media } from 'sanity-plugin-media'
 export default defineConfig({
@@ -28,7 +29,8 @@ export default defineConfig({
       },
       allowOrigins: ['http://localhost:*'],
     }),
-    media()
+    media(),
+    colorInput()
   ],
 
   schema: {

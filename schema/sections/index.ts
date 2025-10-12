@@ -1,8 +1,9 @@
 import hero from './hero';
 import textBlock from './textBlock';
-
+// import { columnStructure } from './columnStructure';
 export default [
   hero,
-  textBlock
-  // Other schemas (e.g., page, other documents)
+  textBlock,
+  // Column
+  // columnStructure
 ];

@@ -1,0 +1,111 @@
+// schemas/sections/columnLayout.js
+import { defineType, defineField } from 'sanity';
+import sections from "."
+// Helper function to filter section types, excluding column layouts
+const getSectionTypes = () => {
+  // This should match your sections import structure
+  // Adjust based on how you're importing your sections
+  const allSchemas = sections
+  return allSchemas
+    .filter((schema) => schema.type === 'object' && schema.name !== 'columnLayout')
+    .map((schema) => ({ type: schema.name }));
+};
+
+export const columnStructure = defineType({
+  name: 'columnLayout',
+  type: 'object',
+  title: 'Column Layout',
+  icon: () => '📐',
+  fields: [
+    defineField({
+      name: 'columns',
+      type: 'array',
+      title: 'Columns',
+      of: [
+        {
+          type: 'object',
+          name: 'column',
+          title: 'Column',
+          fields: [
+            defineField({
+              name: 'width',
+              type: 'string',
+              title: 'Column Width',
+              options: {
+                list: [
+                  { title: '1/2 (50%)', value: 'half' },
+                  { title: '1/3 (33%)', value: 'third' },
+                  { title: '2/3 (66%)', value: 'two-thirds' },
+                  { title: '1/4 (25%)', value: 'quarter' },
+                  { title: '3/4 (75%)', value: 'three-quarters' },
+                  { title: 'Full (100%)', value: 'full' },
+                ],
+              },
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'gap',
+              type: 'string',
+              title: 'Spacing Between Columns',
+              options: {
+                list: [
+                  { title: 'None', value: 'none' },
+                  { title: 'Small', value: 'small' },
+                  { title: 'Medium', value: 'medium' },
+                  { title: 'Large', value: 'large' },
+                ],
+              },
+              initialValue: 'medium',
+            }),
+            defineField({
+              name: 'sections',
+              type: 'array',
+              title: 'Column Sections',
+              of: getSectionTypes(),
+            }),
+          ],
+          preview: {
+            select: {
+              width: 'width',
+              sectionsCount: 'sections.length',
+            },
+            prepare(selection) {
+              const { width, sectionsCount } = selection;
+              return {
+                title: `Column - ${width}`,
+                subtitle: `${sectionsCount || 0} sections`,
+              };
+            },
+          },
+        },
+      ],
+      validation: (Rule) => Rule.required().min(1),
+    }),
+    defineField({
+      name: 'alignment',
+      type: 'string',
+      title: 'Vertical Alignment',
+      options: {
+        list: [
+          { title: 'Top', value: 'top' },
+          { title: 'Center', value: 'center' },
+          { title: 'Bottom', value: 'bottom' },
+          { title: 'Stretch', value: 'stretch' },
+        ],
+      },
+      initialValue: 'top',
+    }),
+  ],
+  preview: {
+    select: {
+      columnsCount: 'columns.length',
+    },
+    prepare(selection) {
+      const { columnsCount } = selection;
+      return {
+        title: 'Column Layout',
+        subtitle: `${columnsCount || 0} columns`,
+      };
+    },
+  },
+});

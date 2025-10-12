@@ -11,6 +11,8 @@ export const customStructure: StructureResolver = (S) =>
         .child(
           getPageTree(S)
         ),
+      S.documentTypeListItem('post')
+        .title('Posts')
     ])
 
 const getPageTree = (S: StructureBuilder, parentId: string | null = null): ReturnType<StructureBuilder['documentTypeList']> => {
