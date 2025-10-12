@@ -1,5 +1,7 @@
-// deskStructure.js
-import type {StructureResolver} from 'sanity/structure'
+// deskStructure.ts
+import type { StructureResolver } from 'sanity/structure'
+// import { S } from 'sanity/structure'
+import type { StructureBuilder } from 'sanity/structure'
 export const customStructure: StructureResolver = (S) =>
   S.list()
     .title('Content')
@@ -7,19 +9,39 @@ export const customStructure: StructureResolver = (S) =>
       S.documentTypeListItem('page')
         .title('Pages')
         .child(
-            getPageTree(S)
-        //   S.documentTypeList('page')
-        //     .title('Nested Pages')
-        //     .filter('_type == "page" && !defined(parent)')
+          getPageTree(S)
         ),
     ])
 
-const getPageTree = (S: any, parentId: string | null = null) =>
-  S.documentTypeList('page')
+const getPageTree = (S: any, parentId: string | null = null) => {
+  const filterQuery = parentId 
+    ? `_type == "page" && parent._ref == "${parentId}"`
+    : `_type == "page" && !defined(parent)`
+
+  return S.documentTypeList('page')
     .title(parentId ? 'Child Pages' : 'Pages')
-    .filter('_type == "page" && $parentId == parent._ref')
-    .params({ parentId })
-    .child((pageId: string) =>
-      // When a page is selected, show its children recursively
-      getPageTree(S, pageId)
+    .filter(filterQuery)
+    .menuItems([])
+    .child((documentId: string) =>
+      S.list()
+        .title('Page Details')
+        .items([
+          // First item: the page editor
+          S.listItem()
+            .id('editor')
+            .title('Edit Page')
+            .child(
+              S.editor()
+                .id(documentId)
+                .schemaType('page')
+                .documentId(documentId)
+            ),
+          S.divider(),
+          // Second item: child pages
+          S.listItem()
+            .id('children')
+            .title('Child Pages')
+            .child(getPageTree(S, documentId)),
+        ])
     )
+}
