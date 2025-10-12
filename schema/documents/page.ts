@@ -2,6 +2,7 @@
 import { defineType, defineField } from 'sanity';
 import sections from '../sections';
 import columnStructure from '../sections/columnStructure';
+import RequiresLoginInput from '../components/RequiresLoginInput'
 // Helper function to filter section types
 const getSectionTypes = () => {
   // Filter schemas to include only objects intended for pageBuilder
@@ -45,5 +46,25 @@ export const page = defineType({
       title: 'Page Sections',
       of: getSectionTypes(), // Dynamically generate the array
     }),
+    defineField({
+      name: 'requiresLogin',
+      title: 'Requires Login',
+      type: 'boolean',
+      components: {
+        input: RequiresLoginInput
+      }
+    }),
   ],
+  preview: {
+  select: {
+    title: 'title',
+    requiresLogin: 'requiresLogin'
+  },
+  prepare({ title, requiresLogin }) {
+    return {
+      title,
+      subtitle: requiresLogin ? '🔒 Login required' : 'Public page'
+    }
+  }
+}
 });
