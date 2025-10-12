@@ -2,6 +2,7 @@ import {defineConfig} from 'sanity'
 import { presentationTool } from 'sanity/presentation'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
+import {customStructure} from "./schema/deskStructure"
 import {schema} from './schema'
 import { media } from 'sanity-plugin-media'
 export default defineConfig({
@@ -9,10 +10,12 @@ export default defineConfig({
   title: 'mkj-test',
 
   projectId: process.env.SANITY_STUDIO_PROJECT_ID || "",
-  dataset: 'production',
+  dataset: process.env.SANITY_STUDIO_DATASET || 'production',
 
   plugins: [
-    structureTool(), 
+    structureTool({
+      structure: customStructure
+    }), 
     visionTool(),
     presentationTool({
       previewUrl: {

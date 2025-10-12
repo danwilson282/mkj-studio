@@ -25,8 +25,18 @@ export const page = defineType({
       name: 'slug',
       type: 'slug',
       title: 'Slug',
-      options: { source: 'title' },
-      validation: (Rule) => Rule.required(),
+      options: {
+        source: 'title',
+        slugify: (input) =>
+          input.toLowerCase().replace(/\s+/g, '-').replace(/[!?]/g, ''),
+      },
+    }),
+    defineField({
+      name: 'parent',
+      type: 'reference',
+      to: [{ type: 'page' }],
+      title: 'Parent Page',
+      description: 'Leave blank for top-level pages',
     }),
     defineField({
       name: 'sections',
