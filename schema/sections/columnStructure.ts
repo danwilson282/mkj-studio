@@ -66,13 +66,14 @@ export default defineType({
           preview: {
             select: {
               width: 'width',
-              sectionsCount: 'sections.length',
+              sections: 'sections',
             },
             prepare(selection) {
-              const { width, sectionsCount } = selection;
+              const { width, sections } = selection;
+              const sectionsCount = sections?.length || 0;
               return {
                 title: `Column - ${width}`,
-                subtitle: `${sectionsCount || 0} sections`,
+                subtitle: `${sectionsCount || 0} section(s)`,
               };
             },
           },
@@ -97,13 +98,14 @@ export default defineType({
   ],
   preview: {
     select: {
-      columnsCount: 'columns.length',
+      columns: 'columns',
     },
     prepare(selection) {
-      const { columnsCount } = selection;
+      const { columns } = selection;
+      const columnsCount = columns?.length || 0;
       return {
         title: 'Column Layout',
-        subtitle: `${columnsCount || 0} columns`,
+        subtitle: `${columnsCount} column(s)`,
       };
     },
   },
