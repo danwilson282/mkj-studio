@@ -1,19 +1,70 @@
 // deskStructure.ts
 import type { StructureResolver, StructureBuilder } from 'sanity/structure'
-// import { S } from 'sanity/structure'
-
+import { FaCog } from 'react-icons/fa'
+import { LuFileText } from 'react-icons/lu' // Lucide
 export const customStructure: StructureResolver = (S) =>
-  S.list()
-    .title('Content')
+S.list()
+    .title('Content Structure')
     .items([
-      S.documentTypeListItem('page')
-        .title('Pages')
+      // 🔹 Section 1: Main Content
+      S.listItem()
+        .title('Content')
+        .icon(LuFileText)
         .child(
-          getPageTree(S)
+          S.list()
+            .title('Content')
+            .items([
+              S.documentTypeListItem('page')
+                .title('Pages')
+                .icon(LuFileText)
+                .child(getPageTree(S)),
+
+              S.documentTypeListItem('post')
+                .title('Posts')
+                .icon(LuFileText),
+            ])
         ),
-      S.documentTypeListItem('post')
-        .title('Posts')
+
+      // 🔹 Section 2: Site Settings
+      S.listItem()
+        .title('Site Settings')
+        .icon(FaCog) 
+        .child(
+          S.list()
+            .title('Site Settings')
+            .items([
+              S.listItem()
+                .title('Header')
+                .icon(FaCog) 
+                .child(
+                  S.editor()
+                    .id('header')
+                    .schemaType('header')
+                    .documentId('header')
+                ),
+
+              S.listItem()
+                .title('Footer')
+                .icon(FaCog) 
+                .child(
+                  S.editor()
+                    .id('footer')
+                    .schemaType('footer')
+                    .documentId('footer')
+                ),
+              S.listItem()
+                .title('Navigation')
+                .icon(FaCog) 
+                .child(
+                  S.editor()
+                    .id('navigation')
+                    .schemaType('navigation')
+                    .documentId('navigation')
+                ),
+            ])
+        ),
     ])
+
 
 const getPageTree = (S: StructureBuilder, parentId: string | null = null): ReturnType<StructureBuilder['documentTypeList']> => {
   const filterQuery = parentId 

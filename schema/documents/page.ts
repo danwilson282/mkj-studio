@@ -16,12 +16,18 @@ export const page = defineType({
   name: 'page',
   type: 'document',
   title: 'Page',
+  groups: [
+    { name: 'content', title: 'Content', default: true },
+    { name: 'style', title: 'Styling' },
+    { name: 'settings', title: 'Page Settings' },
+  ],
   fields: [
     defineField({
       name: 'title',
       type: 'string',
       title: 'Page Title',
       validation: (Rule) => Rule.required(),
+      group: 'content'
     }),
     defineField({
       name: 'slug',
@@ -32,6 +38,7 @@ export const page = defineType({
         slugify: (input) =>
           input.toLowerCase().replace(/\s+/g, '-').replace(/[!?]/g, ''),
       },
+      group: 'content'
     }),
     defineField({
       name: 'parent',
@@ -39,12 +46,14 @@ export const page = defineType({
       to: [{ type: 'page' }],
       title: 'Parent Page',
       description: 'Leave blank for top-level pages',
+      group: 'content'
     }),
     defineField({
       name: 'sections',
       type: 'array',
       title: 'Page Sections',
       of: getSectionTypes(), // Dynamically generate the array
+      group: 'content'
     }),
     defineField({
       name: 'requiresLogin',
@@ -52,7 +61,18 @@ export const page = defineType({
       type: 'boolean',
       components: {
         input: RequiresLoginInput
-      }
+      },
+      group: 'settings'
+    }),
+    defineField({
+      name: 'pageMeta',
+      type: 'pageMeta',
+      group: 'settings'
+    }),
+    defineField({
+      name: 'layout',
+      type: 'layout',
+      group: 'style'
     }),
   ],
   preview: {
