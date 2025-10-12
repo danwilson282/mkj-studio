@@ -13,6 +13,7 @@ import sections from './sections'
 // Objects
 import pageMeta from './objects/pageMeta'
 import layout from './objects/layout'
+import link from './objects/link'
 
 export const schema = [
     // Site settings
@@ -27,5 +28,6 @@ export const schema = [
     columnStructure,
     // Objects
     layout,
-    pageMeta
+    pageMeta,
+    link
 ]
