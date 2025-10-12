@@ -1,17 +1,16 @@
 // schemas/sections/columnLayout.js
 import { defineType, defineField } from 'sanity';
-import sections from "."
+import sections from '.';
 // Helper function to filter section types, excluding column layouts
 const getSectionTypes = () => {
-  // This should match your sections import structure
-  // Adjust based on how you're importing your sections
-  const allSchemas = sections
+  // Filter schemas to include only objects intended for pageBuilder
+  const allSchemas = sections; // You'll need to make this available (see below)
   return allSchemas
-    .filter((schema) => schema.type === 'object' && schema.name !== 'columnLayout')
+    .filter((schema) => schema.type === 'object') // Exclude non-section objects
     .map((schema) => ({ type: schema.name }));
 };
 
-export const columnStructure = defineType({
+export default defineType({
   name: 'columnLayout',
   type: 'object',
   title: 'Column Layout',

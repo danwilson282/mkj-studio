@@ -1,10 +1,11 @@
 // schemas/page.js
 import { defineType, defineField } from 'sanity';
 import sections from '../sections';
+import columnStructure from '../sections/columnStructure';
 // Helper function to filter section types
 const getSectionTypes = () => {
   // Filter schemas to include only objects intended for pageBuilder
-  const allSchemas = sections; // You'll need to make this available (see below)
+  const allSchemas = [...sections,columnStructure]; // You'll need to make this available (see below)
   return allSchemas
     .filter((schema) => schema.type === 'object') // Exclude non-section objects
     .map((schema) => ({ type: schema.name }));
