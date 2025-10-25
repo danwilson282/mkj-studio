@@ -77,9 +77,9 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          { title: '◀ Left', value: 'left' },
+          { title: '◀ Left', value: 'start' },
           { title: '◼ Center', value: 'center' },
-          { title: '▶ Right', value: 'right' },
+          { title: '▶ Right', value: 'end' },
         ],
         layout: 'radio',
       },
@@ -91,16 +91,16 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          { title: '◀ Flex Start', value: 'flex-start' },
-          { title: '◼ Center', value: 'center' },
-          { title: '▶ Flex End', value: 'flex-end' },
-          { title: '◼ ◼ Space Between', value: 'space-between' },
-          { title: '◼   ◼   ◼ Space Around', value: 'space-around' },
-          { title: '◼  ◼  ◼  ◼ Space Evenly', value: 'space-evenly' },
+          { title: '◀ Flex Start', value: 'justify-start' },
+          { title: '◼ Center', value: 'justify-center' },
+          { title: '▶ Flex End', value: 'justify-end' },
+          { title: '◼ ◼ Space Between', value: 'justify-between' },
+          { title: '◼   ◼   ◼ Space Around', value: 'justify-around' },
+          { title: '◼  ◼  ◼  ◼ Space Evenly', value: 'justify-evenly' },
         ],
         layout: 'radio',
       },
-      description: 'How flex items are distributed along the main axis',
+      description: 'How flex items are distributed along the main axis (default y)',
     }),
     defineField({
       name: 'backgroundColor',

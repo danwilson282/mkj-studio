@@ -14,7 +14,7 @@ import sections from './sections'
 import pageMeta from './objects/pageMeta'
 import layout from './objects/layout'
 import link from './objects/link'
-
+import richText from './objects/richText'
 export const schema = [
     // Site settings
     header,
@@ -29,5 +29,6 @@ export const schema = [
     // Objects
     layout,
     pageMeta,
-    link
+    link,
+    richText
 ]
