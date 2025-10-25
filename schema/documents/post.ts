@@ -1,5 +1,4 @@
 import {defineField, defineType} from 'sanity'
-
 export const post = defineType({
   name: 'post',
   title: 'Post',
@@ -30,6 +29,10 @@ export const post = defineType({
       name: 'body',
       type: 'array',
       of: [{type: 'block'}],
+    }),
+    defineField({
+      name: 'layout',
+      type: 'layout',
     }),
   ],
 })

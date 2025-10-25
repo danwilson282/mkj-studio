@@ -1,20 +1,20 @@
-import { defineType } from 'sanity';
+import { defineType, defineField } from 'sanity';
 
 export default defineType({
   name: 'textBlock',
   type: 'object',
   title: 'Text Block',
   fields: [
-    {
+    defineField({
         name: 'title', 
-        type: 'text', 
+        type: 'string', 
         title: 'Title'
-    },
-    {
+    }),
+    defineField({
         name: 'content', 
-        type: 'text', 
+        type: 'richText', 
         title: 'Content'
-    },
+    })
   ],
   preview: {
     select: {
