@@ -95,6 +95,11 @@ export default defineType({
       },
       initialValue: 'top',
     }),
+    defineField({
+      name: 'layout',
+      type: 'layout',
+      group: 'style'
+    }),
   ],
   preview: {
     select: {

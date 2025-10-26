@@ -14,7 +14,12 @@ export default defineType({
         name: 'content', 
         type: 'richText', 
         title: 'Content'
-    })
+    }),
+    defineField({
+      name: 'layout',
+      type: 'layout',
+      group: 'style'
+    }),
   ],
   preview: {
     select: {
