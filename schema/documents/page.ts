@@ -65,6 +65,13 @@ export const page = defineType({
       group: 'settings'
     }),
     defineField({
+      name: 'hideFromNav',
+      title: 'Hide this page from navigation',
+      type: 'boolean',
+      initialValue: false,
+      group: 'settings'
+    }),
+    defineField({
       name: 'pageMeta',
       type: 'pageMeta',
       group: 'settings'
