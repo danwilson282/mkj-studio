@@ -15,11 +15,16 @@ export default defineType({
   type: 'object',
   title: 'Column Layout',
   icon: () => '📐',
+    groups: [
+    { name: 'content', title: 'Content', default: true },
+    { name: 'style', title: 'Styling' },
+  ],
   fields: [
     defineField({
       name: 'columns',
       type: 'array',
       title: 'Columns',
+      group: 'content',
       of: [
         {
           type: 'object',
@@ -94,6 +99,7 @@ export default defineType({
         ],
       },
       initialValue: 'top',
+      group: 'style'
     }),
     defineField({
       name: 'layout',

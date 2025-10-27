@@ -4,16 +4,22 @@ export default defineType({
   name: 'textBlock',
   type: 'object',
   title: 'Text Block',
+    groups: [
+    { name: 'content', title: 'Content', default: true },
+    { name: 'style', title: 'Styling' },
+  ],
   fields: [
     defineField({
         name: 'title', 
         type: 'string', 
-        title: 'Title'
+        title: 'Title',
+        group: 'content'
     }),
     defineField({
         name: 'content', 
         type: 'richText', 
-        title: 'Content'
+        title: 'Content',
+        group: 'content'
     }),
     defineField({
       name: 'layout',
