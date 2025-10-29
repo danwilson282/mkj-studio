@@ -40,6 +40,11 @@ export default defineType({
               },
             ],
           },
+          {
+            name: 'link',
+            type: 'link',
+            title: 'Link',
+          },
         ],
       },
     }),
