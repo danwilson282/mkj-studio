@@ -1,51 +1,49 @@
+// schemas/icon.ts
 import { defineType, defineField } from 'sanity';
 import DynamicIconPicker from '../components/DynamicIconPicker';
-import type { ObjectInputProps } from 'sanity';
-// import * as FaIcons from 'react-icons/fa';
+
 export default defineType({
   name: 'icon',
   type: 'object',
   title: 'Icon Picker',
+    groups: [
+    { name: 'content', title: 'Content', default: true },
+    { name: 'style', title: 'Styling' },
+  ],
   fields: [
     defineField({
       name: 'heading',
       type: 'string',
       title: 'Title',
+      validation: (Rule) => Rule.required(),
+      group: 'content'
     }),
     defineField({
       name: 'icon',
       type: 'string',
       title: 'Icon',
+      components: {
+        input: DynamicIconPicker
+      },
+      validation: (Rule) => Rule.required(),
+      group: 'content'
     }),
     defineField({
       name: 'colour',
-      type: 'string',
+      type: 'color',
       title: 'Colour',
+      group: 'content'
     }),
     defineField({
       name: 'size',
       type: 'number',
       title: 'Size',
+      group: 'content'
+    }),
+    defineField({
+      name: 'layout',
+      type: 'layout',
+      group: 'style'
     }),
   ],
-components: {
-  input: DynamicIconPicker as React.ComponentType<ObjectInputProps<Record<string, any>>>
-},
-  // preview: {
-  // select: {
-  //   heading: 'heading',
-  //   icon: 'icon',
-  //   color: 'color',
-  //   size: 'size',
-  // },
-  //   prepare(selection) {
-  //     const { heading, icon, color, size } = selection;
-  //      const IconComp = FaIcons[icon as keyof typeof FaIcons];
-  //      const iconSize = Number(size) || 24;
-  //     return {
-  //       title: heading,
-  //       media: <IconComp color={color || '#000'} size={iconSize} /> : null,
-  //     };
-  //   },
-  // },
 });
