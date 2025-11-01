@@ -2,6 +2,7 @@
 import type { StructureResolver, StructureBuilder } from 'sanity/structure'
 import { FaCog } from 'react-icons/fa'
 import { LuFileText } from 'react-icons/lu' // Lucide
+import { FaWpforms } from "react-icons/fa";
 export const customStructure: StructureResolver = (S) =>
 S.list()
     .title('Content Structure')
@@ -22,6 +23,9 @@ S.list()
               S.documentTypeListItem('post')
                 .title('Posts')
                 .icon(LuFileText),
+              S.documentTypeListItem('form')
+                .title('Forms')
+                .icon(FaWpforms),
             ])
         ),
 

@@ -5,16 +5,19 @@ import navigation from './globals/navigation'
 // Pages
 import { post } from './documents/post'
 import { page } from './documents/page'
-import columnStructure from './sections/columnStructure'
+import { form } from './documents/form'
+
 
 // Page sections
 import sections from './sections'
+import columnStructure from './sections/columnStructure'
 
 // Objects
 import pageMeta from './objects/pageMeta'
 import layout from './objects/layout'
 import link from './objects/link'
 import richText from './objects/richText'
+import formField from './objects/formField'
 export const schema = [
     // Site settings
     header,
@@ -23,6 +26,7 @@ export const schema = [
     // Page types
     post,
     page,
+    form,
     // Page sections
     ...sections,
     columnStructure,
@@ -30,5 +34,6 @@ export const schema = [
     layout,
     pageMeta,
     link,
-    richText
+    richText,
+    formField
 ]
