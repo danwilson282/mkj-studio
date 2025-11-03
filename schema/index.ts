@@ -6,6 +6,7 @@ import navigation from './globals/navigation'
 import { post } from './documents/post'
 import { page } from './documents/page'
 import { form } from './documents/form'
+import { customDev } from './documents/customDev'
 
 
 // Page sections
@@ -27,6 +28,8 @@ export const schema = [
     post,
     page,
     form,
+    // Dev components
+    customDev,
     // Page sections
     ...sections,
     columnStructure,
