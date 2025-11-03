@@ -52,7 +52,13 @@ export const page = defineType({
       name: 'sections',
       type: 'array',
       title: 'Page Sections',
-      of: getSectionTypes(), // Dynamically generate the array
+      of: [
+        ...getSectionTypes(),
+        {
+          type: "reference",
+          to: [{type: "customDev"}]
+        }
+      ], // Dynamically generate the array
       group: 'content'
     }),
     defineField({
